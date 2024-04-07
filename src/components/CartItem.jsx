@@ -1,8 +1,6 @@
 import { useState } from 'react';
 
-const CartItem = ({ image, name, isVeg, quantity, cost }) => {
-	const [cnt, setCnt] = useState(1);
-
+const CartItem = ({ image, name, isVeg, quantity, cost, count, handleRemove, handleProductCount }) => {
 	return (
 		<div className='cartItem'>
 			<div className='product-image'>
@@ -31,12 +29,24 @@ const CartItem = ({ image, name, isVeg, quantity, cost }) => {
 					</div>
 				</div>
 				<div className='count'>
-					<span> <button>+</button> {cnt} <button>-</button> </span>
+					<span>
+						<button onClick={() => handleProductCount(name, count + 1)}> + </button>
+						{count}
+						<button
+							style={{ cursor: count === 0 && 'not-allowed'}}
+							disabled={count === 0}
+							onClick={() => handleProductCount(name, count - 1)}
+						> - </button>
+					</span>
 				</div>
 				<div className='cost'>
 					<span>Rs. {cost}</span>
-					<button className='save-for-later'>Save for later</button>
-					<button className='remove'>Remove</button>
+					<button className='save-for-later' onClick={() => alert(name + ' Saved..')}>
+						Save for later
+					</button>
+					<button className='remove' onClick={handleRemove}>
+						Remove
+					</button>
 				</div>
 			</div>
 		</div>

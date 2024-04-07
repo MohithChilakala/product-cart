@@ -36,13 +36,30 @@ const ShoppingCart = () => {
 		});
 		setTotalItems(curItems);
 		setTotalCost(curCost);
-	}, []);
+	}, [products]);
+
+	const handleRemove = (name) => {
+		const newProducts = products.filter((product) => product.name !== name);
+		setProducts(newProducts);
+	};
+
+	const handleProductCount = (productName, newCount) => {
+		const updatedProducts = products.map((product) => {
+			if (product.name === productName) {
+				return { ...product, count: newCount };
+			}
+			return product;
+		});
+		setProducts(updatedProducts);
+	};
 
 	return (
 		<div className='container'>
 			<div className='top'>
 				<h3 className='shopping-cart'>Shopping Cart</h3>
-				<button className='remove-all'>Remove all</button>
+				<button className='remove-all' onClick={() => setProducts([])}>
+					Remove all
+				</button>
 			</div>
 			<div>
 				{products.map((product, index) => (
@@ -53,25 +70,32 @@ const ShoppingCart = () => {
 						isVeg={product.isVeg}
 						quantity={product.quantity}
 						cost={product.cost}
+						count={product.count}
+						handleRemove={() => handleRemove(product.name)}
+						handleProductCount={handleProductCount}
 					/>
 				))}
 			</div>
-			<div className='total'>
-				<div>
+			{products.length > 0 ? (
+				<div className='total'>
 					<div>
 						<div>
-							<span className='sub-total'>Sub-total</span>
-							<span className='total-items'>{totalItems} items</span>
+							<div>
+								<span className='sub-total'>Sub-total</span>
+								<span className='total-items'>{totalItems} item{products.length > 1 && 's'}</span>
+							</div>
+							<div>
+								<span className='final-price'>Rs. {totalCost}</span>
+							</div>
 						</div>
 						<div>
-							<span className='final-price'>Rs. {totalCost}</span>
+							<button className='checkout'>Checkout</button>
 						</div>
-					</div>
-					<div>
-						<button className='checkout'>Checkout</button>
 					</div>
 				</div>
-			</div>
+			) : (
+				<div className='empty'>Your cart is empty</div>
+			)}
 		</div>
 	);
 };

@@ -92,6 +92,7 @@
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
 }
 
 .cost {
@@ -181,5 +182,11 @@
 	border-radius: 5px;
 	padding: 3px;
 	font-size: 15px;
+	font-weight: 500;
+}
+
+.empty {
+	text-align: center;
+	font-size: larger;
 	font-weight: 500;
 }
