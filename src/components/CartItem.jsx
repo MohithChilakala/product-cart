@@ -1,44 +1,42 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const CartItem = ({ image, name, isVeg, quantity, cost }) => {
 	const [cnt, setCnt] = useState(1);
 
 	return (
-		<div>
-			<div>
-				<img src={image} alt={name} />
+		<div className='cartItem'>
+			<div className='product-image'>
+				<img width={90} height={90} src={image} alt={name} />
 			</div>
-			<div>
-				<div>
+			<div className='details'>
+				<div className='info'>
 					<div>
-						<p>{name}</p>
-						<p>{quantity}</p>
+						<p className='itemName'>{name}</p>
+						<p className='quantity'>{quantity}</p>
 						{isVeg ? (
 							<img
-								width='48'
-								height='48'
+								width='20'
+								height='20'
 								src='https://img.icons8.com/fluency/48/vegetarian-food-symbol.png'
-								alt='vegetarian-food-symbol'
+								alt='vegetarian'
 							/>
 						) : (
 							<img
-								width='48'
-								height='48'
+								width='20'
+								height='20'
 								src='https://img.icons8.com/fluency/48/non-vegetarian-food-symbol.png'
 								alt='non-vegetarian'
 							/>
 						)}
 					</div>
-					<div>
-						<span>+</span>
-						<p>{cnt}</p>
-						<span>-</span>
-					</div>
-					<div>
-						<span>Rs. {cost}</span>
-						<button>save for later</button>
-						<button>remove</button>
-					</div>
+				</div>
+				<div className='count'>
+					<span> <button>+</button> {cnt} <button>-</button> </span>
+				</div>
+				<div className='cost'>
+					<span>Rs. {cost}</span>
+					<button className='save-for-later'>Save for later</button>
+					<button className='remove'>Remove</button>
 				</div>
 			</div>
 		</div>
