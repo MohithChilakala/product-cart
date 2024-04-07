@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 const CartItem = ({ image, name, isVeg, quantity, cost, count, handleRemove, handleProductCount }) => {
 	return (
 		<div className='cartItem'>
